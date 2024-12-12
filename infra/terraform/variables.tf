@@ -43,14 +43,14 @@ variable "resource_group_name" {
   description = "(Required) The name of the resource group."
   type        = string
   nullable    = false
-  default     = "rg-ollama"
+  default     = "rg-nautilus"
 }
 
 /* LOG ANALYTICS WORKSPACE */
 
 variable "log_analytics_workspace_name" {
   description = "(Required) Specifies the name of the Log Analytics Workspace."
-  default     = "log-ollama"
+  default     = "log-nautilus"
   type        = string
   nullable    = false
 }
@@ -61,7 +61,7 @@ variable "appinsights_name" {
   description = "(Required) Specifies the name of the Application Insights."
   type        = string
   nullable    = false
-  default     = "appi-ollama"
+  default     = "appi-nautilus"
 }
 
 /* VIRTUAL NETWORK */
@@ -77,7 +77,7 @@ variable "vnet_name" {
   description = "(Required) Specifies the name of the Azure Virtual Network (eventually required by an Azure Kubernetes Service)."
   type        = string
   nullable    = false
-  default     = "vnet-ollama"
+  default     = "vnet-nautilus"
 }
 
 /* SUBNET */
@@ -86,7 +86,7 @@ variable "subnet_name" {
   description = "(Required) Specifies the name of the Azure Subnet."
   type        = string
   nullable    = false
-  default     = "subnet-ollama"
+  default     = "subnet-nautilus"
 }
 
 variable "subnet_address_space" {
@@ -102,7 +102,7 @@ variable "nsg_name" {
   description = "(Required) Specifies the name of the Azure Network Security Group (NSG)."
   type        = string
   nullable    = false
-  default     = "nsg-ollama"
+  default     = "nsg-nautilus"
 }
 
 /* SSH KEY */
@@ -111,7 +111,7 @@ variable "ssh_key_name" {
   description = "(Required) Specifies the name of the SSH Key resource. Changing this forces a new resource to be created."
   type        = string
   nullable    = false
-  default     = "sshkey-ollama"
+  default     = "sshkey-nautilus"
 }
 
 /* AZURE KUBERNETES SERVICE (AKS) */
@@ -120,7 +120,7 @@ variable "aks_name" {
   description = "(Required) Specifies the name of the Azure Kubernetes Service (AKS) cluster."
   type        = string
   nullable    = false
-  default     = "aks-ollama"
+  default     = "aks-nautilus"
 }
 
 variable "aks_kubernetes_version" {
@@ -134,7 +134,7 @@ variable "aks_sku" {
   description = "(Optional) The SKU Tier that should be used for this Azure Kubernetes Service (AKS) Cluster. Possible values are `Free`, `Standard`, `Premium` (which includes the Uptime SLA). Defaults to `Standard`."
   type        = string
   nullable    = false
-  default     = "Standard"
+  default     = "Free"
 
   validation {
     condition     = contains(["Free", "Standard", "Premium"], var.aks_sku)
@@ -145,7 +145,7 @@ variable "aks_sku" {
 variable "aks_dns_prefix" {
   description = "(Optional) DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created."
   type        = string
-  default     = "dns-aks-ollama"
+  default     = "dns-aks-nautilus"
 }
 
 variable "aks_admin_username" {
@@ -173,7 +173,7 @@ variable "aks_system_node_pool_vm_size" {
   description = "(Required) Specifies the Virtual Machine size (SKU) which should be used for the Virtual Machines used for the System Node Pool. Changing this forces a new resource to be created. Defaults to `Standard_D2s_v5`."
   type        = string
   nullable    = false
-  default     = "Standard_D2s_v5"
+  default     = "Standard_A2_v2"
 }
 
 variable "aks_system_node_pool_vnet_subnet_id" {
@@ -208,7 +208,7 @@ variable "pip_name" {
   description = "(Required) Specifies the name of the Azure Public IP."
   type        = string
   nullable    = false
-  default     = "pip-ollama"
+  default     = "pip-nautilus"
 }
 
 /* NVIDIA DEVICE PLUGIN */
@@ -251,22 +251,15 @@ variable "ollama_port" {
 }
 
 variable "ollama_image_tag" {
-  description = "(Required) The Docker image tag for the Ollama service. Defaults to `0.3.5`. More info: https://hub.docker.com/r/ollama/ollama/tags"
+  description = "(Required) The Docker image tag for the Ollama service. Defaults to `0.5.1`. More info: https://hub.docker.com/r/ollama/ollama/tags"
   type        = string
   nullable    = false
-  default     = "0.3.5"
+  default     = "0.5.1"
 }
 
 variable "ollama_chart_version" {
-  description = "(Required) The community Helm Chart version for the Ollama service. Defaults to `0.3.5`. More info: https://github.com/otwld/ollama-helm"
+  description = "(Required) The community Helm Chart version for the Ollama service. Defaults to `0.69.0`. More info: https://github.com/otwld/ollama-helm"
   type        = string
   nullable    = false
-  default     = "0.52.0"
-}
-
-variable "ollama_model_name" {
-  description = "(Required) The name of the model that the Ollama service will use. Defaults to `phi3:mini`. More info: https://ollama.com/library"
-  type        = string
-  nullable    = false
-  default     = "phi3:mini"
+  default     = "0.69.0"
 }
