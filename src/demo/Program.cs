@@ -17,21 +17,22 @@ var builder = new ConfigurationBuilder()
                 .AddJsonFile("prompts.json", optional:false);
 
 IConfiguration config = builder.Build();
-var configValues = config.GetSection("ModelConfiguration").Get<Demo.Models.Config>();
+var configMistral = config.GetSection("MistralModelConfiguration").Get<Demo.Models.Config>();
+var configLlama = config.GetSection("LlamaModelConfiguration").Get<Demo.Models.Config>();
+var configPhi3 = config.GetSection("Phi3ModelConfiguration").Get<Demo.Models.Config>();
 
 var promptsValues = config.GetSection("prompts").Get<Demo.Models.Prompts>();
 
 #endregion
 
 var kernelBuilderMistral = Kernel.CreateBuilder()
-                                 .AddAzureOpenAIChatCompletion(configValues.ModelId,configValues.Endpoint, apiKey: configValues.ApiKey);
-
+                                 .AddAzureOpenAIChatCompletion(configMistral.DeploymentName, configMistral.Endpoint, apiKey: configMistral.ApiKey);
 
 var kernelBuilderLlama = Kernel.CreateBuilder()
-                               .AddAzureOpenAIChatCompletion(configValues.ModelId, configValues.Endpoint, apiKey: configValues.ApiKey);
+                               .AddAzureOpenAIChatCompletion(configLlama.DeploymentName, configLlama.Endpoint, apiKey: configLlama.ApiKey);
 
 var kernelBuilderPhi = Kernel.CreateBuilder()
-                                .AddAzureOpenAIChatCompletion(configValues.ModelId, configValues.Endpoint, apiKey: configValues.ApiKey);
+                                .AddAzureOpenAIChatCompletion(configPhi3.DeploymentName, configPhi3.Endpoint, apiKey: configPhi3.ApiKey);
 
 var kernelMistral = kernelBuilderMistral.Build();
 var kernelLlama = kernelBuilderLlama.Build();
