@@ -24,16 +24,14 @@ var promptsValues = config.GetSection("prompts").Get<Demo.Models.Prompts>();
 #endregion
 
 var kernelBuilderMistral = Kernel.CreateBuilder()
-                                 .AddOpenAIChatCompletion(modelId: configValues.ModelId, endpoint: new Uri(configValues.Endpoint), apiKey: configValues.ApiKey);
+                                 .AddAzureOpenAIChatCompletion(configValues.ModelId,configValues.Endpoint, apiKey: configValues.ApiKey);
 
 
 var kernelBuilderLlama = Kernel.CreateBuilder()
-                               .AddOpenAIChatCompletion(modelId: configValues.ModelId, endpoint: new Uri(configValues.Endpoint), apiKey: configValues.ApiKey,
-                               serviceId: configValues.ServiceId);
+                               .AddAzureOpenAIChatCompletion(configValues.ModelId, configValues.Endpoint, apiKey: configValues.ApiKey);
 
 var kernelBuilderPhi = Kernel.CreateBuilder()
-                             .AddOpenAIChatCompletion(modelId: configValues.ModelId, endpoint: new Uri(configValues.Endpoint), apiKey: configValues.ApiKey,
-                              serviceId: configValues.ServiceId);
+                                .AddAzureOpenAIChatCompletion(configValues.ModelId, configValues.Endpoint, apiKey: configValues.ApiKey);
 
 var kernelMistral = kernelBuilderMistral.Build();
 var kernelLlama = kernelBuilderLlama.Build();
@@ -68,7 +66,7 @@ while (!userInput.Equals(@"bye", StringComparison.OrdinalIgnoreCase))
 
     Console.WriteLine("1. Lady Mistral");
     Console.WriteLine("2. Mister Llama");
-    Console.WriteLine("3. The increcible Phi-3");
+    Console.WriteLine("3. The incredible Phi-3");
 
     Console.WriteLine("Do not forget to say bye for leaving");
 
