@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Demo.Models;
-public class Config
+
+internal sealed class Config
 {
-    public string DeploymentName { get; set; }
-    public string ApiKey { get; set; }
-    public string Endpoint { get; set; }
-    public string ModelId { get; set; }
-    public string ServiceId { get; set; }
+    [Required(AllowEmptyStrings = false)]
+    public required string DeploymentName { get; init; }
+
+    [Required(AllowEmptyStrings = false)]
+    public required string ApiKey { get; init; }
+
+    [Required(AllowEmptyStrings = false)]
+    public required string Endpoint { get; init; }
+
+    [Required(AllowEmptyStrings = false)]
+    public required string ModelId { get; init; }
+
+    [Required(AllowEmptyStrings = false)]
+    public required string ServiceId { get; init; }
 }

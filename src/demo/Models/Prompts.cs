@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Demo.Models;
-public class Prompts
+
+internal sealed class Prompts
 {
-    public string Mistral { get; set; }
+    [Required(AllowEmptyStrings = false)]
+    public required string Mistral { get; init; }
 
-    public string Phi3 { get; set; }
+    [Required(AllowEmptyStrings = false)]
+    public required string Phi3 { get; init; }
 
-    public string Llama { get; set; }
+    [Required(AllowEmptyStrings = false)]
+    public required string Llama { get; init; }
 }
