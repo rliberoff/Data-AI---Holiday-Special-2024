@@ -35,11 +35,11 @@ var kernelMistral = CreateKernel(configMistral);
 var kernelLlama = CreateKernel(configLlama);
 var kernelPhi = CreateKernel(configPhi3);
 
-var modelMap = new Dictionary<string, (Kernel kernel, string prompt, ConsoleColor color, string agentName)>
+var modelMap = new Dictionary<string, (Kernel kernel, string prompt, ConsoleColor color, string agentName, string intro)>
 {
-    { @"1", (kernelMistral, promptsValues.Mistral, colorMistral, @"Lady Mistral") },
-    { @"2", (kernelLlama, promptsValues.Llama, colorLlama, @"Mister Llama") },
-    { @"3", (kernelPhi, promptsValues.Phi3, colorPhi, @"The incredible Phi-3") }
+    { @"1", (kernelMistral, promptsValues.Mistral, colorMistral, @"Lady Mistral", "Good day, this is Lady Mistral speaking. How may I assist you today?") },
+    { @"2", (kernelLlama, promptsValues.Llama, colorLlama, @"Mister Llama", "Good day, this is Mister Llama speaking, Intelligence Manager. What is the mission?") },
+    { @"3", (kernelPhi, promptsValues.Phi3, colorPhi, @"The incredible Phi-3", "You've reached Phi-3. Speak swiftly and state your purpose.") }
 };
 
 var userInput = string.Empty;
@@ -55,7 +55,7 @@ while (!string.Equals(userInput, ByeCommand, StringComparison.OrdinalIgnoreCase)
     if (!string.IsNullOrWhiteSpace(userInput) && modelMap.TryGetValue(userInput, out var model))
     {
         Console.ForegroundColor = model.color;
-        Console.WriteLine($"\nGood day, this is {model.agentName} speaking. How may I assist you today?");
+        Console.WriteLine($"\n{model.intro}");
         Console.ResetColor();
         Console.Write(MissionPrompt);
         userInput = Console.ReadLine();
